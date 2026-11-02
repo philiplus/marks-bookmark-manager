@@ -1,0 +1,57 @@
+{
+  "name": "marks-bookmark-manager",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "A local-first bookmark manager with Chrome bookmark import, folder tree, and JSON file storage.",
+  "license": "MIT",
+  "author": "Filipe M Costa",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philiplus/marks-bookmark-manager.git"
+  },
+  "bugs": {
+    "url": "https://github.com/philiplus/marks-bookmark-manager/issues"
+  },
+  "homepage": "https://github.com/philiplus/marks-bookmark-manager#readme",
+  "keywords": [
+    "bookmarks",
+    "bookmark-manager",
+    "chrome-bookmarks",
+    "local-first",
+    "react",
+    "typescript",
+    "express"
+  ],
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "scripts": {
+    "dev": "concurrently -k -n api,web -c cyan,magenta \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "tsx watch server/index.ts",
+    "dev:web": "vite",
+    "build": "vite build",
+    "start": "tsx server/index.ts",
+    "test": "tsx --test server/parser.test.ts server/store.test.ts",
+    "typecheck": "tsc --noEmit -p tsconfig.json && tsc --noEmit -p tsconfig.server.json"
+  },
+  "dependencies": {
+    "express": "^5.3.0",
+    "he": "^2.0.0",
+    "lucide-react": "^1.66.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "tsx": "^4.23.15"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.6",
+    "@types/he": "^1.2.3",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@vitejs/plugin-react": "^6.1.2",
+    "concurrently": "^10.0.6",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.5"
+  }
+}

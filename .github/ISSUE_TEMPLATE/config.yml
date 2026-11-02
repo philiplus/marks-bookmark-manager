@@ -1,0 +1,11 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/philiplus/marks-bookmark-manager/discussions/categories/q-a
+    about: Get help with setup, imports, or usage.
+  - name: Report a security vulnerability
+    url: https://github.com/philiplus/marks-bookmark-manager/security/advisories/new
+    about: Please report security issues privately, never as a public issue.
+  - name: Read the documentation
+    url: https://github.com/philiplus/marks-bookmark-manager#readme
+    about: Setup, features, REST API, and configuration.

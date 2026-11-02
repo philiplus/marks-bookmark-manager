@@ -1,0 +1,82 @@
+name: Bug report
+description: Report something that is broken or behaves unexpectedly.
+title: 'bug: '
+labels: ['bug', 'needs triage']
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the report. Please search [existing issues](https://github.com/philiplus/marks-bookmark-manager/issues)
+        first. For security problems, use [SECURITY.md](https://github.com/philiplus/marks-bookmark-manager/blob/main/SECURITY.md) instead.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: What happened?
+      description: A clear description of the bug and what you expected instead.
+      placeholder: When I import a Chrome export with empty folders, ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: |
+        1. Open Marks
+        2. Click Import and choose samples/chrome-bookmarks.html
+        3. ...
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Marks version or commit
+      description: The release tag, or the output of `git rev-parse --short HEAD`.
+      placeholder: v1.0.0
+    validations:
+      required: true
+
+  - type: input
+    id: node
+    attributes:
+      label: Node.js version
+      description: The output of `node --version`.
+      placeholder: v22.12.0
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating system
+      options:
+        - Linux
+        - macOS
+        - Windows
+        - Other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: browser
+    attributes:
+      label: Browser
+      options:
+        - Chrome / Chromium
+        - Firefox
+        - Safari
+        - Edge
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs or screenshots
+      description: Server output, browser console errors, or screenshots. Remove private data first.
+      render: shell
+    validations:
+      required: false

@@ -1,0 +1,30 @@
+# Normalize line endings for text files, regardless of the platform.
+* text=auto eol=lf
+
+# Explicit text types
+*.ts text
+*.tsx text
+*.js text
+*.jsx text
+*.json text
+*.css text
+*.html text
+*.md text
+*.yml text
+*.yaml text
+*.sh text
+*.svg text
+
+# Binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+
+# Keep lockfiles out of diffs and language stats
+package-lock.json text eol=lf linguist-generated=true
