@@ -43,9 +43,10 @@ jobs:
       - name: Create source and build archives
         env:
           REF_NAME: ${{ inputs.tag || github.ref_name }}
+          ARCHIVE_DIR: ${{ runner.temp }}
         run: |
-          tar -czf "marks-${REF_NAME}-dist.tar.gz" dist/client
-          tar -czf "marks-${REF_NAME}-source.tar.gz" \
+          tar -czf "${ARCHIVE_DIR}/marks-${REF_NAME}-dist.tar.gz" dist/client
+          tar -czf "${ARCHIVE_DIR}/marks-${REF_NAME}-source.tar.gz" \
             --exclude=node_modules --exclude=.git --exclude=data --exclude=dist \
             .
 
@@ -53,10 +54,11 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           REF_NAME: ${{ inputs.tag || github.ref_name }}
+          ARCHIVE_DIR: ${{ runner.temp }}
         run: |
           gh release create "$REF_NAME" \
-            "marks-${REF_NAME}-dist.tar.gz" \
-            "marks-${REF_NAME}-source.tar.gz" \
+            "${ARCHIVE_DIR}/marks-${REF_NAME}-dist.tar.gz" \
+            "${ARCHIVE_DIR}/marks-${REF_NAME}-source.tar.gz" \
             --title "Marks $REF_NAME" \
             --generate-notes \
             --verify-tag
