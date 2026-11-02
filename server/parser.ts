@@ -134,9 +134,38 @@ export function countParsedTree(root: ParsedFolder): ParsedStats {
 }
 
 function cleanText(value: string): string {
-  return decode(value.replace(/<[^>]*>/g, ' '))
+  return decode(stripTags(value))
     .replace(/\s+/g, ' ')
     .trim();
+}
+
+/**
+ * Replace HTML tags with a space in a single linear pass. A regex such as
+ * /<[^>]*>/g is quadratic on input containing many "<" characters with no ">",
+ * and bookmark exports are untrusted input.
+ */
+function stripTags(value: string): string {
+  let result = '';
+  let index = 0;
+
+  while (index < value.length) {
+    const start = value.indexOf('<', index);
+    if (start === -1) {
+      result += value.slice(index);
+      break;
+    }
+
+    const end = value.indexOf('>', start + 1);
+    if (end === -1) {
+      result += value.slice(index);
+      break;
+    }
+
+    result += `${value.slice(index, start)} `;
+    index = end + 1;
+  }
+
+  return result;
 }
 
 function getAttribute(attributes: string, name: string): string | undefined {
