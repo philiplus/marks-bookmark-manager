@@ -1,6 +1,6 @@
 {
   "name": "marks-bookmark-manager",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "private": true,
   "type": "module",
   "description": "A local-first bookmark manager with Chrome bookmark import, folder tree, and JSON file storage.",

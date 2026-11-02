@@ -1,4 +1,4 @@
-import { existsSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import express, { type NextFunction, type Request, type Response } from 'express';
 import type {
@@ -81,12 +81,17 @@ app.use('/api', (_req, res) => {
 
 if (existsSync(path.join(clientDir, 'index.html'))) {
   app.use(express.static(clientDir));
+
+  // Read the SPA shell once at startup instead of touching the filesystem on
+  // every navigation request. The build output is immutable until a restart.
+  const indexHtml = readFileSync(path.join(clientDir, 'index.html'), 'utf8');
+
   app.use((req, res, next) => {
     if (req.method !== 'GET' && req.method !== 'HEAD') {
       next();
       return;
     }
-    res.sendFile(path.join(clientDir, 'index.html'));
+    res.type('html').send(indexHtml);
   });
 }
 

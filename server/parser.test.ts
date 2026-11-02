@@ -84,3 +84,24 @@ test('skips anchors without a URL', () => {
   const root = parseBookmarksHtml('<DL><DT><A>No href</A></DL>');
   assert.equal(root.children.length, 0);
 });
+
+test('strips inline HTML from bookmark titles', () => {
+  const root = parseBookmarksHtml(
+    '<DL><DT><A HREF="https://a.example"><b>Bold</b> title</A></DL>',
+  );
+  const node = root.children[0];
+  assert.equal(node.type, 'bookmark');
+  if (node.type !== 'bookmark') return;
+  assert.equal(node.title, 'Bold title');
+});
+
+test('handles titles with many unterminated angle brackets', () => {
+  const brackets = '<'.repeat(20_000);
+  const root = parseBookmarksHtml(
+    `<DL><DT><A HREF="https://a.example">${brackets}Tail</A></DL>`,
+  );
+  const node = root.children[0];
+  assert.equal(node.type, 'bookmark');
+  if (node.type !== 'bookmark') return;
+  assert.ok(node.title.endsWith('Tail'));
+});
